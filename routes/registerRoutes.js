@@ -39,6 +39,7 @@ router.post("/", async (req, res, next) => {
                 payload.errorMessage = "Something went wrong";
                 res.status(200).render("register", payload);
             });
+
         if (user == null) {
             //no user found
 
