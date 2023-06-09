@@ -27,11 +27,17 @@ const logoutRoute = require('./routes/logoutRoutes');
 const passwordReset = require('./routes/passwordReset');
 const requestReset= require('./routes/requestReset');
 
+// Api Routes
+const postsApiRoute = require('./routes/api/posts');
+
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
+
 app.use("/logout", logoutRoute);
 app.use("/requestReset", requestReset);
 app.use("/passwordReset", passwordReset);
+
+app.use("/api/posts", postsApiRoute);
 
 app.get("/", middleware.requireLogin, (req, res, next) => {
 
