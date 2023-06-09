@@ -6,7 +6,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('./database');
 const session = require('express-session');
-
+const requestReset = require('./routes/requestReset')
+const passwordReset = require('./routes/passwordReset');
 
 const server = app.listen(port, () => console.log("Server listening on port " + port));
 
@@ -29,7 +30,8 @@ const logoutRoute = require('./routes/logoutRoutes');
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/logout", logoutRoute);
-
+app.use("requestReset", requestReset);
+app.use('/passwordReset', passwordReset)
 
 app.get("/", middleware.requireLogin, (req, res, next) => {
 

@@ -12,3 +12,7 @@ $("#postTextarea").keyup(event => {
     }
     submitButton.prop("disabled", false);
 })
+
+$("#submitPostButton").click(() => {
+    var button = $(event.target);
+})

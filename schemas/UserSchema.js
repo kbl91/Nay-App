@@ -32,6 +32,9 @@ const UserSchema = new Schema({
     profilePic: {
         type: String,
         default: "/images/profilePic.jpeg"
+    },
+    resetPassword: {
+        type: String
     }
 }, { timestamps: true});
 
