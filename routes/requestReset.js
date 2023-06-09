@@ -57,14 +57,14 @@ router.post("/", async (req, res, next) => {
             return res.status(400).render("requestReset", payload)
         })
  
-        var transporter = nodemailer.createTransport({
-            host: "smtp server",
-            port: somePort,   //change this to port number
+        var transport = nodemailer.createTransport({
+            host: "sandbox.smtp.mailtrap.io",
+            port: 2525,
             auth: {
-              user: "your mail username",
-              pass: "your email password"
+              user: "1f82aea1db87a4",
+              pass: "816e9e3b77d08c"
             }
-        })
+          });
       
         var mailOptions = {
             from: 'Twitter Clone',
@@ -79,7 +79,7 @@ router.post("/", async (req, res, next) => {
             
         }
       
-        transporter.sendMail(mailOptions, async function(error, info){
+        transport.sendMail(mailOptions, async function(error, info){
             if (error) {
                 const updateUser = await User.findOneAndUpdate({email: findEmail}, {resetPassword: ""})
                 .catch(() => {
