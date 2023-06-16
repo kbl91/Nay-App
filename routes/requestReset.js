@@ -72,9 +72,9 @@ router.post("/", async (req, res, next) => {
             subject: 'Password change',
             html: `You have requested a password change. 
             <p>Please follow this link to change your password:</p>
-            <a href="http://localhost:3003/passwordReset?id=${uniqueId}">Click here</a>
+            <a href="http://localhost:3001/passwordReset?id=${uniqueId}">Click here</a>
             <br><br>If you don't see the link, please copy and paste this line in your browser's address bar:
-            <p>http://localhost:3003/passwordReset?id=${uniqueId}</p>
+            <p>http://localhost:3001/passwordReset?id=${uniqueId}</p>
             `
             
         }
