@@ -11,7 +11,7 @@ const Notification = require('../../schemas/NotificationSchema');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 router.post("/", async (req, res, next) => {
-    if(!req.body.content || !req.body.chatId) {
+    if (!req.body.content || !req.body.chatId) {
         console.log("Invalid data passed into request");
         return res.sendStatus(400);
     }
@@ -23,30 +23,42 @@ router.post("/", async (req, res, next) => {
     };
 
     Message.create(newMessage)
-    .then(async message => {
-        message = await message.populate("sender").execPopulate();
-        message = await message.populate("chat").execPopulate();
-        message = await User.populate(message, { path: "chat.users" });
+    .then(message => {
+        message.populate("sender chat")
+            .then(populatedMessage => {
+                User.populate(populatedMessage, { path: "chat.users" })
+                    .then(populatedMessageWithUsers => {
+                        var chat = Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: populatedMessageWithUsers })
+                            .catch(error => console.log(error));
 
-        var chat = await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message })
-        .catch(error => console.log(error));
+                        insertNotifications(chat, populatedMessageWithUsers);
 
-        insertNotifications(chat, message);
-
-        res.status(201).send(message);
+                        res.status(201).send(populatedMessageWithUsers);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        res.sendStatus(400);
+                    });
+            })
+            .catch(error => {
+                console.log(error);
+                res.sendStatus(400);
+            });
     })
     .catch(error => {
         console.log(error);
         res.sendStatus(400);
-    })
+    });
 })
 
 function insertNotifications(chat, message) {
-    chat.users.forEach(userId => {
-        if(userId == message.sender._id.toString()) return;
-
-        Notification.insertNotification(userId, message.sender._id, "newMessage", message.chat._id);
-    })
+    if (chat && chat.users && Array.isArray(chat.users)) {
+        chat.users.forEach(userId => {
+            if (userId == message.sender._id.toString()) return;
+    
+            Notification.insertNotification(userId, message.sender._id, "newMessage", message.chat._id);
+        });
+    }
 }
 
 module.exports = router;
