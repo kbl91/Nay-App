@@ -67,14 +67,16 @@ router.post("/", async (req, res, next) => {
           });
       
         var mailOptions = {
-            from: 'Twitter Clone',
+            from: 'Nayy App',
             to: findEmail,
-            subject: 'Password change',
+            subject: 'Password change request',
             html: `You have requested a password change. 
             <p>Please follow this link to change your password:</p>
             <a href="http://localhost:3001/passwordReset?id=${uniqueId}">Click here</a>
             <br><br>If you don't see the link, please copy and paste this line in your browser's address bar:
             <p>http://localhost:3001/passwordReset?id=${uniqueId}</p>
+
+            If you did not request this change, you might want to look into that.
             `
             
         }
