@@ -451,8 +451,8 @@ function createPostHtml(postData, largeFont = false) {
             pinnedPostText = "<i class='fas fa-thumbtack'></i> <span>Pinned post</span>";
         }
 
-        buttons = `<button class='pinButton ${pinnedClass}' data-id="${postData._id}" data-toggle="modal" data-target="${dataTarget}"><i class='fas fa-thumbtack'></i></button>
-                    <button data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class='fas fa-times'></i></button>`;
+        buttons = `<button class='pinButton ${pinnedClass}' data-id="${postData._id}" data-toggle="modal" data-target="${dataTarget}"><i class='fas fa-thumbtack' style='color: #e6e7eb;'></i></button>
+                    <button data-id="${postData._id}" data-toggle="modal" data-target="#deletePostModal"><i class='fas fa-times' style='color: #e6e7eb;'></i></button>`;
     }
 
     return `<div class='post ${largeFontClass}' data-id='${postData._id}'>
@@ -478,18 +478,18 @@ function createPostHtml(postData, largeFont = false) {
                         <div class='postFooter'>
                             <div class='postButtonContainer'>
                                 <button data-toggle='modal' data-target='#replyModal'>
-                                    <i class='far fa-comment'></i>
+                                    <i class='far fa-comment' style='color: #e6e7eb;'></i>
                                 </button>
                             </div>
                             <div class='postButtonContainer green'>
                                 <button class='retweetButton ${retweetButtonActiveClass}'>
-                                    <i class='fas fa-retweet'></i>
+                                    <i class='fas fa-retweet' style='color: #e6e7eb;'></i>
                                     <span>${postData.retweetUsers.length || ""}</span>
                                 </button>
                             </div>
                             <div class='postButtonContainer red'>
                                 <button class='likeButton ${likeButtonActiveClass}'>
-                                    <i class='far fa-heart'></i>
+                                    <i class='far fa-heart' style='color: #e6e7eb;'></i>
                                     <span>${postData.likes.length || ""}</span>
                                 </button>
                             </div>

@@ -45,10 +45,10 @@ block content
                 span.description #{profileUser.description}
 
                 .followersContainer
-                    a(href=`/profile/${profileUser.username}/following`)
+                    a(href=`/profile/${profileUser.username}/following` title="Following" alt="Following")
                         span.value #{followingCount}
                         span Following
-                    a(href=`/profile/${profileUser.username}/followers`)
+                    a(href=`/profile/${profileUser.username}/followers` title="Followers" alt="Followers")
                         span#followersValue.value #{followersCount}
                         span Followers
         .tabsContainer
