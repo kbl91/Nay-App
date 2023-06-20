@@ -57,24 +57,24 @@ router.post("/", async (req, res, next) => {
             return res.status(400).render("requestReset", payload)
         })
  
-        var transport = nodemailer.createTransport({
-            host: "sandbox.smtp.mailtrap.io",
-            port: 2525,
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.ethereal.email',
+            port: 587,
             auth: {
-              user: "1f82aea1db87a4",
-              pass: "816e9e3b77d08c"
+                user: 'tanya.quigley59@ethereal.email',
+                pass: 'qF8kb5SnTjXZ3tk2wP'
             }
-          });
+        });
       
         var mailOptions = {
             from: 'Nayy App',
             to: findEmail,
-            subject: 'Password change request',
+            subject: 'Nayy Password change request',
             html: `You have requested a password change. 
             <p>Please follow this link to change your password:</p>
-            <a href="http://localhost:3001/passwordReset?id=${uniqueId}">Click here</a>
+            <a href="https://nayyapp.onrender.com/passwordReset?id=${uniqueId}">Click here</a>
             <br><br>If you don't see the link, please copy and paste this line in your browser's address bar:
-            <p>http://localhost:3001/passwordReset?id=${uniqueId}</p>
+            <p>https://nayyapp.onrender.com/passwordReset?id=${uniqueId}</p>
 
             If you did not request this change, you might want to look into that.
             `
