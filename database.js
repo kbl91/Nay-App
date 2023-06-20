@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 // mongoose.set('useUnifiedTopology', true);
 // mongoose.set('useFindAndModify', false);
 // mongoose.set('useUnifiedTopology', true);
-
+const dotenv = require('dotenv');
+dotenv.config()
 class Database {
 
     constructor() {
@@ -11,7 +12,7 @@ class Database {
     }
 
     connect() {
-        mongoose.connect("mongodb+srv://admin:adminpass1@twitterclonecluster.h6nq0sl.mongodb.net/?retryWrites=true&w=majority")
+        mongoose.connect(process.env.CONNECTIONSTRING)
             .then(() => {
                 console.log('database connection established')
             })
