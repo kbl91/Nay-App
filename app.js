@@ -8,6 +8,8 @@ const mongoose = require('./database');
 const session = require('express-session');
 const dotenv = require('dotenv');
 
+const router = require('./routes/resetPassword');
+
 const server = app.listen(port, () => console.log("Server listening on port " + port));
 const io = require("socket.io")(server, { pingTimeout: 60000 });
 
@@ -53,6 +55,7 @@ app.use("/messages", middleware.requireLogin, messagesRoute);
 app.use("/notifications", middleware.requireLogin, notificationsRoute);
 app.use("/requestReset", requestReset);
 app.use("/passwordReset", passwordReset);
+app.use('/password-reset', router);
 
 app.use("/api/posts", postsApiRoute);
 app.use("/api/users", usersApiRoute);
