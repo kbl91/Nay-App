@@ -22,7 +22,6 @@ html, body {
     background-color: var(--midGrey) ! important;
     font-weight: 300;
     font-family: 'Anonymous Pro', monospace;
-    cursor: auto;
 }
 
 ul {
